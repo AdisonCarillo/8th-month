@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Gallery - Mobile</title>
+<title>Love Gallery - Mobile Spotify</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 
@@ -16,57 +16,64 @@ body {
   justify-content: center;
 }
 
-/* MOBILE FIRST CONTAINER */
+/* KEEP SAME STYLE BUT MOBILE FIT */
 .container {
   width: 100%;
-  max-width: 500px;
+  max-width: 480px;
   padding: 12px;
 }
 
 /* TOP BAR */
 .top-bar {
-  background: white;
-  padding: 12px 14px;
-  border-radius: 18px;
+  border-radius: 25px;
+  padding: 12px 15px;
   display: flex;
   justify-content: space-between;
+  background: white;
   font-size: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* IMAGE CARD */
-.card {
+/* MAIN STACK (IMPORTANT FIX) */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin-top: 12px;
+}
+
+/* IMAGE CARD SAME STYLE */
+.card {
   background: white;
-  border-radius: 18px;
-  overflow: hidden;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .card img {
   width: 100%;
-  display: block;
+  border-radius: 18px;
 }
 
-/* MUSIC PLAYER */
+/* MUSIC (same design, mobile fit) */
 .music {
-  margin-top: 12px;
   background: #121212;
   color: white;
-  border-radius: 18px;
+  border-radius: 25px;
   padding: 18px;
   text-align: center;
 }
 
 .spotify-header {
-  font-size: 11px;
-  color: #b3b3b3;
   display: flex;
   justify-content: space-between;
+  font-size: 11px;
+  color: #b3b3b3;
 }
 
 /* VINYL */
 .vinyl-wrapper {
-  margin: 15px 0;
+  margin: 18px 0;
 }
 
 .vinyl {
@@ -97,15 +104,16 @@ body {
   to { transform: rotate(360deg); }
 }
 
+/* TEXT */
 .song-info h3 {
   margin: 5px 0;
   font-size: 15px;
 }
 
 .song-info p {
+  margin: 0;
   font-size: 12px;
   color: #b3b3b3;
-  margin: 0;
 }
 
 /* PROGRESS */
@@ -136,20 +144,18 @@ body {
   font-weight: bold;
 }
 
-/* LETTER */
+/* LETTER SAME STYLE */
 .letter {
-  margin-top: 12px;
   background: #6b3b3b;
   color: white;
+  border-radius: 25px;
   padding: 18px;
-  border-radius: 18px;
   font-size: 14px;
   line-height: 1.6;
 }
 
-/* GALLERY (MOBILE SWIPE STYLE) */
+/* GALLERY FIX (IMPORTANT) */
 .gallery {
-  margin-top: 12px;
   display: flex;
   overflow-x: auto;
   gap: 10px;
@@ -158,15 +164,14 @@ body {
 }
 
 .gallery img {
-  width: 85%;
-  border-radius: 14px;
+  width: 80%;
+  border-radius: 15px;
   flex-shrink: 0;
   scroll-snap-align: center;
 }
 
-/* BUTTONS */
+/* BUTTONS MOBILE STACK */
 .buttons {
-  margin-top: 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -174,10 +179,10 @@ body {
 
 button {
   padding: 12px;
-  border-radius: 14px;
+  border-radius: 18px;
   border: none;
   background: white;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* MODAL */
@@ -190,10 +195,33 @@ button {
   align-items: center;
 }
 
-.modal img {
+.modal-img {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 12px;
+  border-radius: 15px;
+}
+
+/* DESKTOP STILL OK */
+@media (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .main {
+    flex-direction: row;
+  }
+
+  .card {
+    flex: 2;
+  }
+
+  .music {
+    flex: 1;
+  }
+
+  .buttons {
+    flex-direction: row;
+  }
 }
 </style>
 </head>
@@ -203,42 +231,46 @@ button {
 <div class="container">
 
   <div class="top-bar">
-    <span>I LOVE YOU ❤️</span>
-    <span>05/07/2026</span>
+    <span>I LOVE YOU SO MUCH BABY</span>
+    <span>MAY 07 2026</span>
   </div>
 
-  <div class="card">
-    <img src="ast kita.jpg">
+  <div class="main">
+
+    <div class="card">
+      <img src="ast kita.jpg">
+    </div>
+
+    <div class="music">
+
+      <div class="spotify-header">
+        <span>🎵 Now Playing</span>
+        <span></span>
+      </div>
+
+      <div class="vinyl-wrapper">
+        <div class="vinyl" id="vinyl"></div>
+      </div>
+
+      <div class="song-info">
+        <h3>YOU & I</h3>
+        <p>One Direction</p>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress" id="progress"></div>
+      </div>
+
+      <div class="controls">
+        <button onclick="toggleMusic()">⏯ Play</button>
+      </div>
+
+      <audio id="audio" src="You & I - One Direction (Lyrics).mp3"></audio>
+
+    </div>
+
   </div>
 
-  <!-- MUSIC -->
-  <div class="music">
-
-    <div class="spotify-header">
-      <span>🎵 Now Playing</span>
-    </div>
-
-    <div class="vinyl-wrapper">
-      <div class="vinyl" id="vinyl"></div>
-    </div>
-
-    <div class="song-info">
-      <h3>YOU & I</h3>
-      <p>One Direction</p>
-    </div>
-
-    <div class="progress-container">
-      <div class="progress" id="progress"></div>
-    </div>
-
-    <div class="controls">
-      <button onclick="toggleMusic()">Play / Pause</button>
-    </div>
-
-    <audio id="audio" src="You & I - One Direction (Lyrics).mp3"></audio>
-  </div>
-
-  <!-- LETTER -->
   <div class="letter">
     <h3>8th MONTHS</h3>
     <p>Hello my love, Happy 8th months to us full of memories together.</p>
@@ -270,7 +302,6 @@ button {
          </p>
   </div>
 
-  <!-- GALLERY -->
   <div class="gallery">
     <img src="december.jpg" onclick="openModal(this.src)">
     <img src="october 1st date.jpg" onclick="openModal(this.src)">
@@ -280,7 +311,6 @@ button {
     <img src="sawda.jpg" onclick="openModal(this.src)">
   </div>
 
-  <!-- BUTTONS -->
   <div class="buttons">
     <button onclick="goBack()">Go back</button>
     <button onclick="nextPage()">Next page</button>
@@ -288,9 +318,8 @@ button {
 
 </div>
 
-<!-- MODAL -->
 <div class="modal" id="modal" onclick="closeModal()">
-  <img id="modalImg">
+  <img id="modalImg" class="modal-img">
 </div>
 
 <script>
@@ -326,11 +355,11 @@ function closeModal(){
 }
 
 function goBack(){
-  alert("There is no turning back, my love ❤️");
+  alert("There is no turning back ❤️");
 }
 
 function nextPage(){
-  alert("For our next chapter 💍");
+  alert("Next chapter 💍");
 }
 </script>
 
